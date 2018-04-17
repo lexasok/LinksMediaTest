@@ -20,5 +20,7 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        //set data
+        recyclerView.setAdapter(new RecyclerViewAdapter(Event.createFakeEvents()));
     }
 }
