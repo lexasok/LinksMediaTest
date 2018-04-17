@@ -1,6 +1,7 @@
 package net.ozero.linksmediatest;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.place.setText(events.get(position).place);
         holder.preview.setText(events.get(position).preview);
         holder.article.setText(events.get(position).article);
+
+        holder.cardContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     @Override
@@ -47,6 +56,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView place;
         TextView preview;
         TextView article;
+        CardView cardContainer;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -56,6 +66,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             place = itemView.findViewById(R.id.place);
             preview = itemView.findViewById(R.id.preview);
             article = itemView.findViewById(R.id.article);
+
+            cardContainer = itemView.findViewById(R.id.cardContainer);
         }
     }
 }
