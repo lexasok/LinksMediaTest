@@ -1,5 +1,7 @@
 package net.ozero.linksmediatest;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +15,11 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
     ArrayList<Event> events;
+    Context context;
 
-    RecyclerViewAdapter(ArrayList<Event> events) {
+    RecyclerViewAdapter(ArrayList<Event> events, Context context) {
         this.events = events;
+        this.context = context;
     }
 
 
@@ -27,18 +31,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.title.setText(events.get(position).title);
         holder.coefficient.setText(events.get(position).coefficient);
         holder.time.setText(events.get(position).time);
         holder.place.setText(events.get(position).place);
         holder.preview.setText(events.get(position).preview);
-        holder.article.setText(events.get(position).article);
+
+        final String article = events.get(position).article;
+        holder.article.setText(article);
 
         holder.cardContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, ArticleActivity.class);
+                intent.putExtra("article", article);
+                context.startActivity(intent);
             }
         });
 

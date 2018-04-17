@@ -21,6 +21,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         //set data
-        recyclerView.setAdapter(new RecyclerViewAdapter(Event.createFakeEvents()));
+        recyclerView.setAdapter(new RecyclerViewAdapter(Event.createFakeEvents(), this));
     }
 }
