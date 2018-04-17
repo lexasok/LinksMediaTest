@@ -45,7 +45,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         public ArticleViewHolder(View itemView) {
             super(itemView);
             header = itemView.findViewById(R.id.header);
-            text = itemView.findViewById(R.id.text);
+            text = itemView.findViewById(R.id.textArticle);
 
         }
     }

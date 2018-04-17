@@ -42,6 +42,7 @@ public class ArticleActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.articleRecyclerView);
         linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(new ArticleAdapter(itemArticle.articles));
     }
 
