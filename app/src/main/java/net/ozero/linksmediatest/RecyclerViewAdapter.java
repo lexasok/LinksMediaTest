@@ -2,27 +2,42 @@ package net.ozero.linksmediatest;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+
+    ArrayList<Event> events;
+
+    RecyclerViewAdapter(ArrayList<Event> events) {
+        this.events = events;
+    }
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.title.setText(events.get(position).title);
+        holder.coefficient.setText(events.get(position).coefficient);
+        holder.time.setText(events.get(position).time);
+        holder.place.setText(events.get(position).place);
+        holder.preview.setText(events.get(position).preview);
+        holder.article.setText(events.get(position).article);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return events.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
