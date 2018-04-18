@@ -69,18 +69,24 @@ public class MainActivity extends AppCompatActivity {
 
         mApi.events("football").enqueue(new Callback<Events>() {
             @Override
-            public void onResponse(@NonNull Call<Events> call, @NonNull Response<Events> response) {
+            public void onResponse(Call<Events> call, Response<Events> response) {
                 if (response.body() != null) {
                     Events eve = response.body();
                     events.clear();
-                    events.addAll(eve.getEvents());
+                    try {
+                        assert eve != null;
+                        events.addAll(eve.getEvents());
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 //                    recyclerViewAdapter.notifyDataSetChanged();
 
                 } else events = new ArrayList<>();
             }
 
             @Override
-            public void onFailure(@NonNull Call<Events> call, @NonNull Throwable t) {
+            public void onFailure(Call<Events> call, Throwable t) {
                 Toast.makeText(MainActivity.this, DATA_LOADING_ERROR, Toast.LENGTH_LONG).show();
             }
         });
