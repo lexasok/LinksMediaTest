@@ -60,29 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadEvents() {
 
-        try {
-            Response response = mApi.events("football").execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
 
         mApi.events("football").enqueue(new Callback<Events>() {
             @Override
             public void onResponse(Call<Events> call, Response<Events> response) {
-                if (response.body() != null) {
-                    Events eve = response.body();
-                    events.clear();
-                    try {
-                        assert eve != null;
-                        events.addAll(eve.getEvents());
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-//                    recyclerViewAdapter.notifyDataSetChanged();
-
-                } else events = new ArrayList<>();
+                Events events1 = response.body();
+                if (events1 != null) {
+                    recyclerViewAdapter.setEvents(events1.getEvents());
+                }
             }
 
             @Override
