@@ -4,20 +4,33 @@ import android.annotation.SuppressLint;
 import android.app.LoaderManager;
 import android.content.AsyncTaskLoader;
 import android.content.Loader;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import net.ozero.linksmediatest.api.Api;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int LOADER_EVENTS = 0;
+    private static final String DATA_LOADING_ERROR = "Ошибка загрузки данных с сервера!";
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
+    private RecyclerViewAdapter recyclerViewAdapter;
 
     private Api mApi;
+
+    private ArrayList<Event> events;
 
 
     @Override
@@ -25,48 +38,52 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         recyclerView = findViewById(R.id.recyclerView);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        mApi =((App) getApplication()).api();
-        
-        Events events = loadEvents();
+
+        events = new ArrayList<>();
+        recyclerViewAdapter = new RecyclerViewAdapter(events,this);
+        recyclerView.setAdapter(recyclerViewAdapter);
+
+
+        mApi = ((App) getApplication()).api();
+
 
         //set data
-        recyclerView.setAdapter(new RecyclerViewAdapter(events.getEvents(), this));
+
+        loadEvents();
+
     }
 
-    private Events loadEvents() {
-        getLoaderManager().initLoader(LOADER_EVENTS, null, new LoaderManager.LoaderCallbacks<Events>() {
-            @SuppressLint("StaticFieldLeak")
-            @Override
-            public Loader<Events> onCreateLoader(int id, Bundle args) {
-                return new AsyncTaskLoader<Events>(getApplicationContext()) {
-                    @Override
-                    public Events loadInBackground() {
-                        try {
-                            return mApi.events("football").execute().body();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            return null;
-                        }
+    private void loadEvents() {
 
-                    }
-                };
+        try {
+            Response response = mApi.events("football").execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        mApi.events("football").enqueue(new Callback<Events>() {
+            @Override
+            public void onResponse(@NonNull Call<Events> call, @NonNull Response<Events> response) {
+                if (response.body() != null) {
+                    Events eve = response.body();
+                    events.clear();
+                    events.addAll(eve.getEvents());
+//                    recyclerViewAdapter.notifyDataSetChanged();
+
+                } else events = new ArrayList<>();
             }
 
             @Override
-            public void onLoadFinished(Loader<Events> loader, Events data) {
-
-            }
-
-            @Override
-            public void onLoaderReset(Loader<Events> loader) {
-
+            public void onFailure(@NonNull Call<Events> call, @NonNull Throwable t) {
+                Toast.makeText(MainActivity.this, DATA_LOADING_ERROR, Toast.LENGTH_LONG).show();
             }
         });
-        return null;
     }
 
 }

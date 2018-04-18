@@ -17,6 +17,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     ArrayList<Event> events;
     Context context;
 
+    RecyclerViewAdapter(Context context) {
+        this.context = context;
+    }
+
     RecyclerViewAdapter(ArrayList<Event> events, Context context) {
         this.events = events;
         this.context = context;
@@ -55,6 +59,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public int getItemCount() {
         return events.size();
+    }
+
+    public void clear() {
+        events.clear();
+    }
+
+    public void setEvents(ArrayList<Event> events) {
+        this.events.addAll(events);
+        notifyDataSetChanged();
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

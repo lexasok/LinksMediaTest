@@ -13,7 +13,7 @@ import retrofit2.http.Query;
 
 public interface Api {
 
-    @GET("list.php")
+    @GET("/list.php")
     Call<Events> events(@Query("category") String category);
 
     @GET("post.php")

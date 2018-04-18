@@ -31,9 +31,8 @@ public class App extends Application {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://mikonatoruri.win/")
+                .baseUrl("http://mikonatoruri.win")
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(okHttpClient)
                 .build();
 
         mApi = retrofit.create(Api.class);

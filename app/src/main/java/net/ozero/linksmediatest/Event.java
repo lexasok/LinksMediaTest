@@ -1,44 +1,35 @@
 package net.ozero.linksmediatest;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class Event {
 
+    @SerializedName("title")
+    @Expose
     String title;
+
+    @SerializedName("coefficient")
+    @Expose
     String coefficient;
+
+    @SerializedName("time")
+    @Expose
     String time;
+
+    @SerializedName("place")
+    @Expose
     String place;
+
+    @SerializedName("preview")
+    @Expose
     String preview;
+
+    @SerializedName("article")
+    @Expose
     String article;
 
-    public Event(String title, String coefficient, String time, String place, String preview, String article) {
-        this.title = title;
-        this.coefficient = coefficient;
-        this.time = time;
-        this.place = place;
-        this.preview = preview;
-        this.article = article;
-    }
-
-    public Event(boolean isFakeEvent) {
-        if (isFakeEvent) {
-            title = "«Жирона» – «Леганес»: как закончится игра?";
-            coefficient = "1.98 Коэффициент ";
-            time = "Время: Завтра в 23:00 МСК";
-            place = "Турнир: Испания. Примера";
-            preview = "В стартовом матче 24-го тура испанской Примеры«Жирона» сыграет с «Леганесом». В первом круге соперники сыграли вничью 0:0. Будет ли определен победитель в этой встрече? Предлагаем наш прогноз. ";
-            article = "/2018/02/15/zhirona-leganes-prognoz-na-ispanskuju-la-ligu-16-02-2018";
-        }
-    }
-
-    public static ArrayList<Event> createFakeEvents() {
-
-        ArrayList<Event> events = new ArrayList<>();
-        for (int i = 0; i < 10; i ++) {
-            events.add(new Event(true));
-        }
-
-        return events;
-    }
 
 }
