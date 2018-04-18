@@ -1,5 +1,7 @@
 package net.ozero.linksmediatest;
 
+import android.app.LoaderManager;
+import android.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +11,7 @@ import net.ozero.linksmediatest.api.Api;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int LOADER_EVENTS = 0;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
 
@@ -25,9 +28,30 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         mApi =((App) getApplication()).api();
+        
+        loadEvents();
 
         //set data
 //        recyclerView.setAdapter(new RecyclerViewAdapter(Event.createFakeEvents(), this));
+    }
+
+    private void loadEvents() {
+        getLoaderManager().initLoader(LOADER_EVENTS, null, new LoaderManager.LoaderCallbacks<Events>() {
+            @Override
+            public Loader<Events> onCreateLoader(int id, Bundle args) {
+                return null;
+            }
+
+            @Override
+            public void onLoadFinished(Loader<Events> loader, Events data) {
+
+            }
+
+            @Override
+            public void onLoaderReset(Loader<Events> loader) {
+
+            }
+        });
     }
 
 }
