@@ -8,6 +8,9 @@ import com.google.gson.GsonBuilder;
 
 import net.ozero.linksmediatest.api.Api;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+
 public class App extends Application {
 
     private Api mApi;
@@ -17,9 +20,13 @@ public class App extends Application {
         super.onCreate();
 
         Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_DASHES)
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .create();
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new HttpLoggingInterceptor())
+                .build();
 
 
 
