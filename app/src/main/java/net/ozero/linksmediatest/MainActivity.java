@@ -5,10 +5,13 @@ import android.app.LoaderManager;
 import android.content.AsyncTaskLoader;
 import android.content.Loader;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import net.ozero.linksmediatest.api.Api;
@@ -31,14 +34,37 @@ public class MainActivity extends AppCompatActivity {
     private Api mApi;
 
     private ArrayList<Event> events;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
+        tabLayout = findViewById(R.id.tabs);
+        viewPager = findViewById(R.id.viewPager);
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        initUi();
+
+    }
+
+    private void initUi() {
+        if (viewPager.getAdapter() != null) {
+            return;
+        }
+
+        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
+        tabLayout.setupWithViewPager(viewPager);
+
+    }
 }

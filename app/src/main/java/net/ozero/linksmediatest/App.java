@@ -15,6 +15,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App extends Application {
 
+    public static final String EXTRA_CATEGORY = "category";
+
+    public static final String CATEGORY_FOOTBALL = "football";
+    public static final String CATEGORY_HOCKEY = "hockey";
+    public static final String CATEGORY_TENNIS = "tennis";
+    public static final String CATEGORY_BASKETBALL = "basketball";
+    public static final String CATEGORY_VOLLEYBALL = "volleyball";
+    public static final String CATEGORY_CYBERSPORT = "cybersport";
+
     private Api mApi;
 
     @Override

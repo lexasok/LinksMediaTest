@@ -67,7 +67,7 @@ public class EventsFragment extends Fragment {
     private void loadEvents() {
 
 
-        mApi.events("football").enqueue(new Callback<Events>() {
+        mApi.events(getArguments().getString(App.EXTRA_CATEGORY)).enqueue(new Callback<Events>() {
             @Override
             public void onResponse(Call<Events> call, Response<Events> response) {
                 Events events1 = response.body();
