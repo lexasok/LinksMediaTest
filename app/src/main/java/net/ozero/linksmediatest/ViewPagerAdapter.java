@@ -29,7 +29,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         args.putString(App.EXTRA_CATEGORY, titleTabs[position]);
         EventsFragment eventsFragment = new EventsFragment();
         eventsFragment.setArguments(args);
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
         return eventsFragment;
     }
 
