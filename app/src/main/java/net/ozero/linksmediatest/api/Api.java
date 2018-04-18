@@ -2,6 +2,7 @@ package net.ozero.linksmediatest.api;
 
 import net.ozero.linksmediatest.Event;
 import net.ozero.linksmediatest.Events;
+import net.ozero.linksmediatest.ItemArticle;
 
 import java.util.ArrayList;
 
@@ -16,5 +17,5 @@ public interface Api {
     Call<Events> events(@Query("category") String category);
 
     @GET("post.php")
-    Call<Events> itemArticle(@Query("article") String article);
+    Call<ItemArticle> itemArticle(@Query("article") String article);
 }
