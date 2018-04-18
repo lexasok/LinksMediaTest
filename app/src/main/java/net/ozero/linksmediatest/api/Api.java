@@ -8,9 +8,13 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface Api {
 
-    @GET("list.php?category={category}")
-    Call<Events> events(@Path("category") String category);
+    @GET("list.php")
+    Call<Events> events(@Query("category") String category);
+
+    @GET("post.php")
+    Call<Events> itemArticle(@Query("article") String article);
 }
