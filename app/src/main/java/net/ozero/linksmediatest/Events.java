@@ -10,5 +10,8 @@ public class Events {
 
     ArrayList<Event> events;
 
+    private ArrayList<Event> getEvents() {
+        return events;
+    }
 
 }
