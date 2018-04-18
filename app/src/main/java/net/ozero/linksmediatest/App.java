@@ -36,11 +36,7 @@ public class App extends Application {
                 .client(okHttpClient)
                 .build();
 
-
-
-
-
-
+        mApi = retrofit.create(Api.class);
 
 
     }
