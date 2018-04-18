@@ -10,6 +10,8 @@ import net.ozero.linksmediatest.api.Api;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App extends Application {
 
@@ -25,8 +27,18 @@ public class App extends Application {
                 .create();
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new HttpLoggingInterceptor())
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.HEADERS : HttpLoggingInterceptor.Level.NONE))
                 .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://mikonatoruri.win/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(okHttpClient)
+                .build();
+
+
+
+
 
 
 
