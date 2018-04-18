@@ -38,43 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        recyclerView = findViewById(R.id.recyclerView);
-        linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-
-        events = new ArrayList<>();
-        recyclerViewAdapter = new RecyclerViewAdapter(events,this);
-        recyclerView.setAdapter(recyclerViewAdapter);
-
-
-        mApi = ((App) getApplication()).api();
-
-
-        //set data
-
-        loadEvents();
-
     }
 
-    private void loadEvents() {
-
-
-        mApi.events("football").enqueue(new Callback<Events>() {
-            @Override
-            public void onResponse(Call<Events> call, Response<Events> response) {
-                Events events1 = response.body();
-                if (events1 != null) {
-                    recyclerViewAdapter.setEvents(events1.getEvents());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Events> call, Throwable t) {
-                Toast.makeText(MainActivity.this, DATA_LOADING_ERROR, Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 
 }
