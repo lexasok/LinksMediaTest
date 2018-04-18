@@ -2,4 +2,5 @@
 <resources>
     <dimen name="cornerRadius">16dp</dimen>
     <dimen name="defaultPadding">8dp</dimen>
+    <dimen name="hugePadding">34dp</dimen>
 </resources>
