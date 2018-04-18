@@ -1,6 +1,8 @@
 package net.ozero.linksmediatest;
 
+import android.annotation.SuppressLint;
 import android.app.LoaderManager;
+import android.content.AsyncTaskLoader;
 import android.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,17 +31,29 @@ public class MainActivity extends AppCompatActivity {
 
         mApi =((App) getApplication()).api();
         
-        loadEvents();
+        Events events = loadEvents();
 
         //set data
-//        recyclerView.setAdapter(new RecyclerViewAdapter(Event.createFakeEvents(), this));
+        recyclerView.setAdapter(new RecyclerViewAdapter(events.getEvents(), this));
     }
 
-    private void loadEvents() {
+    private Events loadEvents() {
         getLoaderManager().initLoader(LOADER_EVENTS, null, new LoaderManager.LoaderCallbacks<Events>() {
+            @SuppressLint("StaticFieldLeak")
             @Override
             public Loader<Events> onCreateLoader(int id, Bundle args) {
-                return null;
+                return new AsyncTaskLoader<Events>(getApplicationContext()) {
+                    @Override
+                    public Events loadInBackground() {
+                        try {
+                            return mApi.events("football").execute().body();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return null;
+                        }
+
+                    }
+                };
             }
 
             @Override
@@ -52,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        return null;
     }
 
 }
