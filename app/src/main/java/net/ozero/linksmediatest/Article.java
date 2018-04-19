@@ -1,34 +1,33 @@
 package net.ozero.linksmediatest;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class Article {
+
+    @SerializedName("header")
+    @Expose
     String header;
+
+    @SerializedName("text")
+    @Expose
     String text;
 
-    public Article(boolean isFake) {
-        if (isFake) {
-            header = "«Жирона» ";
-            text = "«Жирона» в минувшем туре играла на выезде против «Севильи». " +
-                    "Поединок был важен в плане шансов каталонского клуба вмешаться " +
-                    "в распределение путевок в еврокубки. Как оказалось, пока еще «жиронцам» " +
-                    "рановато на международную арену. Единственный точный удар «нервионцев» в " +
-                    "конце первого тайма оказался победным.Поражение от «Севильи» прервало " +
-                    "неплохую серию подопечных Пабло Мачина, на протяжении которой они сыграли на " +
-                    "выезде вничью с мадридским «Атлетико» 1:1 и «Малагой» 0:0, а также одержали " +
-                    "две домашние победы над «Лас-Пальмасом» 6:0 и «Атлетиком» Бильбао 2:0. " +
-                    "В целом за шесть предыдущих домашних поединков «Жирона» уступила только " +
-                    "«Алавесу» 2:3. В тоже время к выше указанным победам можно также добавить " +
-                    "за этот период успех в матчах с мадридским «Реалом» 3:2 и «Хетафе» 1:0." +
-                    "В лазарете у каталонцев Хосе Аурелио Суарес, Пере Понс и Дуглас Луис.";
-        }
+    public String getHeader() {
+        return header;
     }
 
-    public static ArrayList<Article> createFakeArticles() {
-        ArrayList<Article> articles = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            articles.add(new Article(true));
-        }
-        return articles;
+    public void setHeader(String header) {
+        this.header = header;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }
