@@ -16,6 +16,6 @@ public interface Api {
     @GET("/list.php")
     Call<Events> events(@Query("category") String category);
 
-    @GET("post.php")
+    @GET("/post.php")
     Call<ItemArticle> itemArticle(@Query("article") String article);
 }

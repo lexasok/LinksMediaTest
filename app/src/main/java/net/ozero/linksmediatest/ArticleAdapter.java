@@ -49,4 +49,9 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
         }
     }
+
+    public void setArticles(ArrayList<Article> articles) {
+        this.articles.addAll(articles);
+        notifyDataSetChanged();
+    }
 }
