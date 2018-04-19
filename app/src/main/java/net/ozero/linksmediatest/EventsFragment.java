@@ -27,6 +27,7 @@ public class EventsFragment extends Fragment {
     private ArrayList<Event> events;
     private RecyclerViewAdapter recyclerViewAdapter;
     private Api mApi;
+    private Events eventsReceived;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,9 +71,9 @@ public class EventsFragment extends Fragment {
         mApi.events(getArguments().getString(App.EXTRA_CATEGORY)).enqueue(new Callback<Events>() {
             @Override
             public void onResponse(Call<Events> call, Response<Events> response) {
-                Events events1 = response.body();
-                if (events1 != null && events1.getEvents().size() > 0) {
-                    recyclerViewAdapter.setEvents(events1.getEvents());
+                eventsReceived = response.body();
+                if (eventsReceived != null && eventsReceived.getEvents().size() > 0) {
+                    recyclerViewAdapter.setEvents(eventsReceived.getEvents());
                 }
             }
 
@@ -81,6 +82,9 @@ public class EventsFragment extends Fragment {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
 
             }
+
+
         });
+
     }
 }
