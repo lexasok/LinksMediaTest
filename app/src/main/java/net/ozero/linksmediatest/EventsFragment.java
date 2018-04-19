@@ -71,14 +71,15 @@ public class EventsFragment extends Fragment {
             @Override
             public void onResponse(Call<Events> call, Response<Events> response) {
                 Events events1 = response.body();
-                if (events1 != null) {
+                if (events1 != null && events1.getEvents().size() > 0) {
                     recyclerViewAdapter.setEvents(events1.getEvents());
                 }
             }
 
             @Override
             public void onFailure(Call<Events> call, Throwable t) {
-                Toast.makeText(getContext(), DATA_LOADING_ERROR, Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+
             }
         });
     }
